@@ -85,12 +85,17 @@ useEffect(() => {
     
     setLoading(true)
     
-    try {
+try {
       const dataToSave = {
-        ...formData,
-        companyId: formData.companyId ? parseInt(formData.companyId, 10) : null
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        jobTitle: formData.jobTitle,
+        companyId: formData.companyId ? parseInt(formData.companyId, 10) : null,
+        status: formData.status,
+        notes: formData.notes
       }
-      
       if (contact) {
         await contactService.update(contact.Id, dataToSave)
         toast.success('Contact updated successfully')

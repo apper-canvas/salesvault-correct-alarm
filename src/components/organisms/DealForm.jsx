@@ -95,15 +95,17 @@ useEffect(() => {
     
     setLoading(true)
     
-    try {
+try {
       const dataToSave = {
-        ...formData,
+        name: formData.name,
         amount: Number(formData.amount),
+        stage: formData.stage,
+        closeDate: formData.closeDate,
         contactId: formData.contactId ? parseInt(formData.contactId, 10) : null,
         companyId: formData.companyId ? parseInt(formData.companyId, 10) : null,
-        closeDate: new Date(formData.closeDate).toISOString()
+        ownerId: formData.ownerId,
+        notes: formData.notes
       }
-      
       if (deal) {
         await dealService.update(deal.Id, dataToSave)
         toast.success('Deal updated successfully')
