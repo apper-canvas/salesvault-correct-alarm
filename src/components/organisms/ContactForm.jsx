@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import Button from '@/components/atoms/Button'
-import FormField from '@/components/molecules/FormField'
-import { contactService, companyService } from '@/services'
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Button from "@/components/atoms/Button";
+import FormField from "@/components/molecules/FormField";
+import { companyService, contactService } from "@/services";
 
 export default function ContactForm({ contact, onSave, onCancel }) {
   const [formData, setFormData] = useState({
@@ -15,11 +15,18 @@ export default function ContactForm({ contact, onSave, onCancel }) {
     status: 'Active',
     notes: ''
   })
-  const [companies, setCompanies] = useState([])
+
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
+  const [companies, setCompanies] = useState([])
 
-useEffect(() => {
+  // Load companies for dropdown
+  useEffect(() => {
+    loadCompanies()
+  }, [])
+
+  // Populate form data when contact prop changes
+  useEffect(() => {
     if (contact) {
       setFormData({
         firstName: contact.first_name || '',
@@ -34,30 +41,33 @@ useEffect(() => {
     }
   }, [contact])
 
-  useEffect(() => {
-    loadCompanies()
-  }, [])
-
-  const loadCompanies = async () => {
+  async function loadCompanies() {
     try {
       const companiesData = await companyService.getAll()
-      setCompanies(companiesData)
+      setCompanies(companiesData || [])
     } catch (error) {
-      toast.error('Failed to load companies')
+      console.error('Failed to load companies:', error)
+      setCompanies([])
     }
   }
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
     
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }))
     }
   }
 
-  const validateForm = () => {
+  function validateForm() {
     const newErrors = {}
     
     if (!formData.firstName.trim()) {
@@ -70,8 +80,8 @@ useEffect(() => {
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address'
     }
     
     setErrors(newErrors)
@@ -85,17 +95,19 @@ useEffect(() => {
     
     setLoading(true)
     
-try {
+    try {
+      // Transform form data to match database field names (only updateable fields)
       const dataToSave = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        jobTitle: formData.jobTitle,
-        companyId: formData.companyId ? parseInt(formData.companyId, 10) : null,
+        job_title: formData.jobTitle,
+        company_id: formData.companyId ? parseInt(formData.companyId, 10) : null,
         status: formData.status,
         notes: formData.notes
       }
+      
       if (contact) {
         await contactService.update(contact.Id, dataToSave)
         toast.success('Contact updated successfully')
@@ -106,6 +118,7 @@ try {
       
       onSave?.()
     } catch (error) {
+      console.error('Form submission error:', error)
       toast.error(contact ? 'Failed to update contact' : 'Failed to create contact')
     } finally {
       setLoading(false)
@@ -150,6 +163,7 @@ try {
         type="tel"
         value={formData.phone}
         onChange={handleChange}
+        error={errors.phone}
       />
 
       <FormField
@@ -157,74 +171,71 @@ try {
         name="jobTitle"
         value={formData.jobTitle}
         onChange={handleChange}
+        error={errors.jobTitle}
       />
 
-      <div className="space-y-1">
-        <label className="block text-sm font-medium text-surface-700">
-          Company
-        </label>
-        <select
-          name="companyId"
-          value={formData.companyId}
-          onChange={handleChange}
-          className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-        >
-<option value="">Select a company</option>
-          {companies.map(company => (
-            <option key={company.Id} value={company.Id}>
-              {company.Name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <FormField
+        label="Company"
+        name="companyId"
+        type="select"
+        value={formData.companyId}
+        onChange={handleChange}
+        error={errors.companyId}
+        options={[
+          { value: '', label: 'Select a company' },
+          ...companies.map(company => ({
+            value: company.Id?.toString() || '',
+            label: company.Name || 'Unnamed Company'
+          }))
+        ]}
+      />
 
-      <div className="space-y-1">
-        <label className="block text-sm font-medium text-surface-700">
-          Status
-        </label>
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-        >
-          <option value="Active">Active</option>
-          <option value="Lead">Lead</option>
-          <option value="Prospect">Prospect</option>
-          <option value="Inactive">Inactive</option>
-        </select>
-      </div>
+      <FormField
+        label="Status"
+        name="status"
+        type="select"
+        value={formData.status}
+        onChange={handleChange}
+        error={errors.status}
+        options={[
+          { value: 'Active', label: 'Active' },
+          { value: 'Lead', label: 'Lead' },
+          { value: 'Prospect', label: 'Prospect' },
+          { value: 'Inactive', label: 'Inactive' }
+        ]}
+      />
 
-      <div className="space-y-1">
-        <label className="block text-sm font-medium text-surface-700">
-          Notes
-        </label>
-        <textarea
-          name="notes"
-          value={formData.notes}
-          onChange={handleChange}
-          rows={3}
-          className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          placeholder="Additional notes..."
-        />
-      </div>
+      <FormField
+        label="Notes"
+        name="notes"
+        type="textarea"
+        value={formData.notes}
+        onChange={handleChange}
+        error={errors.notes}
+        rows={4}
+      />
 
       <div className="flex justify-end space-x-3 pt-4">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={onCancel}
-          disabled={loading}
-        >
-          Cancel
-        </Button>
+        {onCancel && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            disabled={loading}
+          >
+            Cancel
+          </Button>
+        )}
+        
         <Button
           type="submit"
           loading={loading}
+          disabled={loading}
         >
           {contact ? 'Update Contact' : 'Create Contact'}
         </Button>
       </div>
+</div>
     </form>
   )
 }
