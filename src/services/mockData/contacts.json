@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 1,
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "john.smith@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "jobTitle": "VP of Engineering",
+    "companyId": 1,
+    "status": "Active",
+    "notes": "Key decision maker for technical implementations. Prefers detailed technical specifications.",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "Id": 2,
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@innovateplus.com",
+    "phone": "+1 (555) 234-5678",
+    "jobTitle": "Chief Marketing Officer",
+    "companyId": 2,
+    "status": "Active",
+    "notes": "Interested in marketing automation solutions. Budget authority up to $50K.",
+    "createdAt": "2024-01-18T09:15:00Z",
+    "updatedAt": "2024-01-25T16:20:00Z"
+  },
+  {
+    "Id": 3,
+    "firstName": "Michael",
+    "lastName": "Chen",
+    "email": "m.chen@globalventures.com",
+    "phone": "+1 (555) 345-6789",
+    "jobTitle": "Senior Director",
+    "companyId": 3,
+    "status": "Lead",
+    "notes": "Evaluating CRM solutions for enterprise deployment. Needs integration with existing systems.",
+    "createdAt": "2024-02-01T11:00:00Z",
+    "updatedAt": "2024-02-05T13:30:00Z"
+  },
+  {
+    "Id": 4,
+    "firstName": "Emily",
+    "lastName": "Rodriguez",
+    "email": "emily.r@futuretech.io",
+    "phone": "+1 (555) 456-7890",
+    "jobTitle": "Product Manager",
+    "companyId": 4,
+    "status": "Active",
+    "notes": "Looking for analytics and reporting capabilities. Timeline is Q2 implementation.",
+    "createdAt": "2024-02-03T08:45:00Z",
+    "updatedAt": "2024-02-08T10:15:00Z"
+  },
+  {
+    "Id": 5,
+    "firstName": "David",
+    "lastName": "Williams",
+    "email": "d.williams@pinnaclegroup.com",
+    "phone": "+1 (555) 567-8901",
+    "jobTitle": "Operations Director",
+    "companyId": 5,
+    "status": "Prospect",
+    "notes": "Initial contact made. Interested in workflow automation and team collaboration features.",
+    "createdAt": "2024-02-10T15:20:00Z",
+    "updatedAt": "2024-02-12T09:40:00Z"
+  }
+]

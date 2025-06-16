@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 1,
+    "name": "TechCorp Solutions",
+    "industry": "Technology",
+    "website": "https://techcorp.com",
+    "phone": "+1 (555) 100-2000",
+    "address": "123 Innovation Drive, San Francisco, CA 94102",
+    "revenue": 15000000,
+    "primaryContactId": 1,
+    "notes": "Major technology company specializing in enterprise software solutions. Strong growth trajectory.",
+    "createdAt": "2024-01-10T12:00:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "InnovatePlus Inc",
+    "industry": "Marketing",
+    "website": "https://innovateplus.com",
+    "phone": "+1 (555) 200-3000",
+    "address": "456 Creative Boulevard, Austin, TX 78701",
+    "revenue": 8500000,
+    "primaryContactId": 2,
+    "notes": "Fast-growing marketing agency with focus on digital transformation. Expanding team rapidly.",
+    "createdAt": "2024-01-12T14:30:00Z",
+    "updatedAt": "2024-01-25T16:20:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Global Ventures Ltd",
+    "industry": "Consulting",
+    "website": "https://globalventures.com",
+    "phone": "+1 (555) 300-4000",
+    "address": "789 Business Center, New York, NY 10001",
+    "revenue": 25000000,
+    "primaryContactId": 3,
+    "notes": "International consulting firm with offices worldwide. High-value enterprise client.",
+    "createdAt": "2024-01-20T10:15:00Z",
+    "updatedAt": "2/5/2024 1:30:00 PMZ"
+  },
+  {
+    "Id": 4,
+    "name": "FutureTech.io",
+    "industry": "Software",
+    "website": "https://futuretech.io",
+    "phone": "+1 (555) 400-5000",
+    "address": "321 Startup Lane, Seattle, WA 98101",
+    "revenue": 5200000,
+    "primaryContactId": 4,
+    "notes": "Emerging software company with innovative products. Strong potential for partnership.",
+    "createdAt": "2024-01-25T16:45:00Z",
+    "updatedAt": "2024-02-08T10:15:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Pinnacle Group",
+    "industry": "Finance",
+    "website": "https://pinnaclegroup.com",
+    "phone": "+1 (555) 500-6000",
+    "address": "654 Financial District, Chicago, IL 60601",
+    "revenue": 12000000,
+    "primaryContactId": 5,
+    "notes": "Established financial services company looking to modernize operations and improve efficiency.",
+    "createdAt": "2024-02-01T09:30:00Z",
+    "updatedAt": "2024-02-12T09:40:00Z"
+  }
+]
