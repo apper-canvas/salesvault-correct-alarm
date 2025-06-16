@@ -232,10 +232,9 @@ export default function ContactForm({ contact, onSave, onCancel }) {
           loading={loading}
           disabled={loading}
         >
-          {contact ? 'Update Contact' : 'Create Contact'}
+{contact ? 'Update Contact' : 'Create Contact'}
         </Button>
       </div>
-</div>
     </form>
   )
 }
