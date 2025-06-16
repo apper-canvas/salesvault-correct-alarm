@@ -95,9 +95,10 @@ export default function ContactForm({ contact, onSave, onCancel }) {
     
     setLoading(true)
     
-    try {
+try {
       // Transform form data to match database field names (only updateable fields)
       const dataToSave = {
+        Name: `${formData.firstName || ''} ${formData.lastName || ''}`.trim() || 'Unknown Contact',
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email,
@@ -105,7 +106,9 @@ export default function ContactForm({ contact, onSave, onCancel }) {
         job_title: formData.jobTitle,
         company_id: formData.companyId ? parseInt(formData.companyId, 10) : null,
         status: formData.status,
-        notes: formData.notes
+        notes: formData.notes,
+        Tags: '',
+        Owner: null
       }
       
       if (contact) {

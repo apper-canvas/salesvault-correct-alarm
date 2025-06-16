@@ -57,11 +57,10 @@ const contactService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
       
-      // Only include Updateable fields in create operation
-      const updateableData = {
-        Name: `${contactData.firstName || contactData.first_name} ${contactData.lastName || contactData.last_name}`,
+const updateableData = {
+        Name: `${contactData.firstName || contactData.first_name || ''} ${contactData.lastName || contactData.last_name || ''}`.trim() || 'Unknown Contact',
         Tags: contactData.Tags || '',
-        Owner: contactData.Owner,
+        Owner: contactData.Owner || null,
         first_name: contactData.firstName || contactData.first_name,
         last_name: contactData.lastName || contactData.last_name,
         email: contactData.email,
@@ -69,9 +68,8 @@ const contactService = {
         job_title: contactData.jobTitle || contactData.job_title,
         status: contactData.status,
         notes: contactData.notes,
-        company_id: contactData.companyId ? parseInt(contactData.companyId, 10) : null
+        company_id: contactData.companyId || contactData.company_id ? parseInt(contactData.companyId || contactData.company_id, 10) : null
       };
-      
       const params = {
         records: [updateableData]
       };
@@ -108,12 +106,11 @@ const contactService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
       
-      // Only include Updateable fields in update operation
-      const updateableData = {
+const updateableData = {
         Id: parseInt(id, 10),
-        Name: `${updateData.firstName || updateData.first_name} ${updateData.lastName || updateData.last_name}`,
+        Name: `${updateData.firstName || updateData.first_name || ''} ${updateData.lastName || updateData.last_name || ''}`.trim() || 'Unknown Contact',
         Tags: updateData.Tags || '',
-        Owner: updateData.Owner,
+        Owner: updateData.Owner || null,
         first_name: updateData.firstName || updateData.first_name,
         last_name: updateData.lastName || updateData.last_name,
         email: updateData.email,
@@ -121,9 +118,8 @@ const contactService = {
         job_title: updateData.jobTitle || updateData.job_title,
         status: updateData.status,
         notes: updateData.notes,
-        company_id: updateData.companyId ? parseInt(updateData.companyId, 10) : null
+        company_id: updateData.companyId || updateData.company_id ? parseInt(updateData.companyId || updateData.company_id, 10) : null
       };
-      
       const params = {
         records: [updateableData]
       };
