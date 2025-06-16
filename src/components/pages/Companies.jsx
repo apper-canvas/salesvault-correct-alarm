@@ -52,9 +52,9 @@ export default function Companies() {
   const filterCompanies = () => {
     let filtered = [...companies]
     
-    if (searchTerm) {
+if (searchTerm) {
       filtered = filtered.filter(company =>
-        company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        company.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         company.industry?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         company.website?.toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -67,9 +67,9 @@ export default function Companies() {
     setFilteredCompanies(filtered)
   }
 
-  const getContactName = (contactId) => {
+const getContactName = (contactId) => {
     const contact = contacts.find(c => c.Id === contactId)
-    return contact ? `${contact.firstName} ${contact.lastName}` : '-'
+    return contact ? `${contact.first_name} ${contact.last_name}` : '-'
   }
 
   const getUniqueIndustries = () => {
@@ -87,8 +87,8 @@ export default function Companies() {
     setShowModal(true)
   }
 
-  const handleDelete = async (company) => {
-    if (!window.confirm(`Are you sure you want to delete ${company.name}?`)) {
+const handleDelete = async (company) => {
+    if (!window.confirm(`Are you sure you want to delete ${company.Name}?`)) {
       return
     }
     
@@ -115,13 +115,13 @@ export default function Companies() {
     }).format(amount)
   }
 
-  const columns = [
+const columns = [
     {
-      key: 'name',
+      key: 'Name',
       label: 'Company',
-      render: (name, company) => (
+      render: (Name, company) => (
         <div>
-          <div className="font-medium text-surface-900">{name}</div>
+          <div className="font-medium text-surface-900">{Name}</div>
           {company.website && (
             <a
               href={company.website}
@@ -145,10 +145,10 @@ export default function Companies() {
       label: 'Revenue',
       render: (revenue) => revenue ? formatCurrency(revenue) : '-'
     },
-    {
-      key: 'primaryContactId',
+{
+      key: 'primary_contact_id',
       label: 'Primary Contact',
-      render: (contactId) => getContactName(contactId)
+      render: (primary_contact_id) => getContactName(primary_contact_id)
     },
     {
       key: 'phone',

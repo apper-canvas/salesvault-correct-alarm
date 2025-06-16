@@ -22,16 +22,16 @@ export default function DealForm({ deal, onSave, onCancel }) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
-  useEffect(() => {
+useEffect(() => {
     if (deal) {
       setFormData({
-        name: deal.name || '',
+        name: deal.Name || '',
         amount: deal.amount?.toString() || '',
         stage: deal.stage || 'Lead',
-        closeDate: deal.closeDate ? new Date(deal.closeDate).toISOString().split('T')[0] : '',
-        contactId: deal.contactId?.toString() || '',
-        companyId: deal.companyId?.toString() || '',
-        ownerId: deal.ownerId || 'sales-rep-1',
+        closeDate: deal.close_date ? new Date(deal.close_date).toISOString().split('T')[0] : '',
+        contactId: deal.contact_id?.toString() || '',
+        companyId: deal.company_id?.toString() || '',
+        ownerId: deal.owner_id || 'sales-rep-1',
         notes: deal.notes || ''
       })
     }
@@ -183,12 +183,12 @@ export default function DealForm({ deal, onSave, onCancel }) {
             onChange={handleChange}
             className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           >
-            <option value="">Select a contact</option>
-            {contacts.map(contact => (
-              <option key={contact.Id} value={contact.Id}>
-                {contact.firstName} {contact.lastName}
-              </option>
-            ))}
+<option value="">Select a contact</option>
+          {contacts.map(contact => (
+            <option key={contact.Id} value={contact.Id}>
+              {contact.first_name} {contact.last_name}
+            </option>
+          ))}
           </select>
         </div>
 
@@ -202,12 +202,12 @@ export default function DealForm({ deal, onSave, onCancel }) {
             onChange={handleChange}
             className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           >
-            <option value="">Select a company</option>
-            {companies.map(company => (
-              <option key={company.Id} value={company.Id}>
-                {company.name}
-              </option>
-            ))}
+<option value="">Select a company</option>
+          {companies.map(company => (
+            <option key={company.Id} value={company.Id}>
+              {company.Name}
+            </option>
+          ))}
           </select>
         </div>
       </div>

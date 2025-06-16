@@ -53,11 +53,11 @@ export default function Contacts() {
   const filterContacts = () => {
     let filtered = [...contacts]
     
-    if (searchTerm) {
+if (searchTerm) {
       filtered = filtered.filter(contact =>
-        `${contact.firstName} ${contact.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        `${contact.first_name} ${contact.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contact.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.jobTitle?.toLowerCase().includes(searchTerm.toLowerCase())
+        contact.job_title?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
     
@@ -67,10 +67,9 @@ export default function Contacts() {
     
     setFilteredContacts(filtered)
   }
-
-  const getCompanyName = (companyId) => {
+const getCompanyName = (companyId) => {
     const company = companies.find(c => c.Id === companyId)
-    return company ? company.name : 'No Company'
+    return company ? company.Name : 'No Company'
   }
 
   const handleCreate = () => {
@@ -83,8 +82,8 @@ export default function Contacts() {
     setShowModal(true)
   }
 
-  const handleDelete = async (contact) => {
-    if (!window.confirm(`Are you sure you want to delete ${contact.firstName} ${contact.lastName}?`)) {
+const handleDelete = async (contact) => {
+    if (!window.confirm(`Are you sure you want to delete ${contact.first_name} ${contact.last_name}?`)) {
       return
     }
     
@@ -103,28 +102,28 @@ export default function Contacts() {
     loadData()
   }
 
-  const columns = [
+const columns = [
     {
-      key: 'firstName',
+      key: 'first_name',
       label: 'Name',
       render: (_, contact) => (
         <div>
           <div className="font-medium text-surface-900">
-            {contact.firstName} {contact.lastName}
+            {contact.first_name} {contact.last_name}
           </div>
           <div className="text-sm text-surface-500">{contact.email}</div>
         </div>
       )
     },
-    {
-      key: 'jobTitle',
+{
+      key: 'job_title',
       label: 'Job Title',
-      render: (jobTitle) => jobTitle || '-'
+      render: (job_title) => job_title || '-'
     },
-    {
-      key: 'companyId',
+{
+      key: 'company_id',
       label: 'Company',
-      render: (companyId) => getCompanyName(companyId)
+      render: (company_id) => getCompanyName(company_id)
     },
     {
       key: 'phone',

@@ -19,16 +19,16 @@ export default function CompanyForm({ company, onSave, onCancel }) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
-  useEffect(() => {
+useEffect(() => {
     if (company) {
       setFormData({
-        name: company.name || '',
+        name: company.Name || '',
         industry: company.industry || '',
         website: company.website || '',
         phone: company.phone || '',
         address: company.address || '',
         revenue: company.revenue?.toString() || '',
-        primaryContactId: company.primaryContactId?.toString() || '',
+        primaryContactId: company.primary_contact_id?.toString() || '',
         notes: company.notes || ''
       })
     }
@@ -171,10 +171,10 @@ export default function CompanyForm({ company, onSave, onCancel }) {
           onChange={handleChange}
           className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         >
-          <option value="">Select a contact</option>
+<option value="">Select a contact</option>
           {contacts.map(contact => (
             <option key={contact.Id} value={contact.Id}>
-              {contact.firstName} {contact.lastName}
+              {contact.first_name} {contact.last_name}
             </option>
           ))}
         </select>

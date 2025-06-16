@@ -58,10 +58,10 @@ export default function Deals() {
   const filterDeals = () => {
     let filtered = [...deals]
     
-    if (searchTerm) {
+if (searchTerm) {
       filtered = filtered.filter(deal =>
-        deal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        deal.ownerId?.toLowerCase().includes(searchTerm.toLowerCase())
+        deal.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        deal.owner_id?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
     
@@ -72,14 +72,14 @@ export default function Deals() {
     setFilteredDeals(filtered)
   }
 
-  const getContactName = (contactId) => {
+const getContactName = (contactId) => {
     const contact = contacts.find(c => c.Id === contactId)
-    return contact ? `${contact.firstName} ${contact.lastName}` : 'No Contact'
+    return contact ? `${contact.first_name} ${contact.last_name}` : 'No Contact'
   }
 
-  const getCompanyName = (companyId) => {
+const getCompanyName = (companyId) => {
     const company = companies.find(c => c.Id === companyId)
-    return company ? company.name : 'No Company'
+    return company ? company.Name : 'No Company'
   }
 
   const getStageColor = (stage) => {
@@ -104,8 +104,8 @@ export default function Deals() {
     setShowModal(true)
   }
 
-  const handleDelete = async (deal) => {
-    if (!window.confirm(`Are you sure you want to delete ${deal.name}?`)) {
+const handleDelete = async (deal) => {
+    if (!window.confirm(`Are you sure you want to delete ${deal.Name}?`)) {
       return
     }
     
@@ -132,15 +132,15 @@ export default function Deals() {
     }).format(amount)
   }
 
-  const columns = [
+const columns = [
     {
-      key: 'name',
+      key: 'Name',
       label: 'Deal Name',
-      render: (name, deal) => (
+      render: (Name, deal) => (
         <div>
-          <div className="font-medium text-surface-900">{name}</div>
+          <div className="font-medium text-surface-900">{Name}</div>
           <div className="text-sm text-surface-500">
-            {getContactName(deal.contactId)} • {getCompanyName(deal.companyId)}
+            {getContactName(deal.contact_id)} • {getCompanyName(deal.company_id)}
           </div>
         </div>
       )
@@ -163,15 +163,15 @@ export default function Deals() {
         </Badge>
       )
     },
-    {
-      key: 'closeDate',
+{
+      key: 'close_date',
       label: 'Close Date',
-      render: (closeDate) => new Date(closeDate).toLocaleDateString()
+      render: (close_date) => new Date(close_date).toLocaleDateString()
     },
-    {
-      key: 'ownerId',
+{
+      key: 'owner_id',
       label: 'Owner',
-      render: (ownerId) => ownerId?.replace('sales-rep-', 'Sales Rep ') || '-'
+      render: (owner_id) => owner_id?.replace('sales-rep-', 'Sales Rep ') || '-'
     }
   ]
 

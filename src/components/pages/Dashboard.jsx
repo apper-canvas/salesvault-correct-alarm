@@ -41,21 +41,21 @@ export default function Dashboard() {
   }
 
   const getRecentActivities = () => {
-    const activities = [
+const activities = [
       ...deals.slice(0, 3).map(deal => ({
         id: `deal-${deal.Id}`,
         type: 'deal',
-        title: `${deal.name} - ${deal.stage}`,
+        title: `${deal.Name} - ${deal.stage}`,
         subtitle: `$${deal.amount.toLocaleString()}`,
-        time: new Date(deal.updatedAt).toLocaleDateString(),
+        time: new Date(deal.ModifiedOn || Date.now()).toLocaleDateString(),
         icon: 'Handshake'
       })),
       ...contacts.slice(0, 2).map(contact => ({
         id: `contact-${contact.Id}`,
         type: 'contact',
-        title: `${contact.firstName} ${contact.lastName}`,
-        subtitle: contact.jobTitle || 'New Contact',
-        time: new Date(contact.updatedAt).toLocaleDateString(),
+        title: `${contact.first_name} ${contact.last_name}`,
+        subtitle: contact.job_title || 'New Contact',
+        time: new Date(contact.ModifiedOn || Date.now()).toLocaleDateString(),
         icon: 'User'
       }))
     ].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 5)

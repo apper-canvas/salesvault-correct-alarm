@@ -19,15 +19,15 @@ export default function ContactForm({ contact, onSave, onCancel }) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
-  useEffect(() => {
+useEffect(() => {
     if (contact) {
       setFormData({
-        firstName: contact.firstName || '',
-        lastName: contact.lastName || '',
+        firstName: contact.first_name || '',
+        lastName: contact.last_name || '',
         email: contact.email || '',
         phone: contact.phone || '',
-        jobTitle: contact.jobTitle || '',
-        companyId: contact.companyId?.toString() || '',
+        jobTitle: contact.job_title || '',
+        companyId: contact.company_id?.toString() || '',
         status: contact.status || 'Active',
         notes: contact.notes || ''
       })
@@ -164,10 +164,10 @@ export default function ContactForm({ contact, onSave, onCancel }) {
           onChange={handleChange}
           className="block w-full px-3 py-2 border border-surface-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         >
-          <option value="">Select a company</option>
+<option value="">Select a company</option>
           {companies.map(company => (
             <option key={company.Id} value={company.Id}>
-              {company.name}
+              {company.Name}
             </option>
           ))}
         </select>
